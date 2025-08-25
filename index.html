@@ -19,9 +19,42 @@
 		img {
 			opacity: 1 !important; /* Force all images to be visible */
 			transition: opacity 0.3s ease-in-out;
-			display: block;
+			display: block !important;
 			max-width: 100%;
 			height: auto;
+			visibility: visible !important;
+			position: relative !important;
+		}
+		
+		/* Mobile-Specific Image Fixes */
+		@media (max-width: 768px) {
+			img {
+				display: block !important;
+				opacity: 1 !important;
+				visibility: visible !important;
+				max-width: 100% !important;
+				width: auto !important;
+				height: auto !important;
+				position: relative !important;
+				z-index: 1 !important;
+			}
+			
+			.elementor-widget-image img,
+			.elementor-image img,
+			.custom-logo,
+			.attachment-large,
+			.attachment-2048x2048,
+			.swiper-slide-image {
+				display: block !important;
+				opacity: 1 !important;
+				visibility: visible !important;
+			}
+			
+			/* Fix for WordPress/Elementor mobile hiding */
+			.elementor-widget-container img {
+				display: block !important;
+				visibility: visible !important;
+			}
 		}
 		
 		/* Optional loading animation for lazy images */
@@ -71,9 +104,63 @@
 			0% { transform: translateX(-100%); }
 			100% { transform: translateX(100%); }
 		}
+		
+		/* Mobile Image Force Display Critical Fix */
+		@media screen and (max-width: 768px) {
+			img, 
+			.elementor-image img,
+			.elementor-widget-image img,
+			.elementor-image-box-img img,
+			.wp-image,
+			[class*="wp-image-"] {
+				display: block !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+				max-width: 100% !important;
+				height: auto !important;
+				transform: none !important;
+			}
+			
+			/* Force Elementor containers to show images */
+			.elementor-widget-container {
+				overflow: visible !important;
+			}
+			
+			.elementor-image,
+			.elementor-widget-image {
+				display: block !important;
+			}
+			
+			/* Remove any transforms that might hide images */
+			.elementor-image img[style*="transform"] {
+				transform: none !important;
+			}
+			
+			/* Ensure lazy loading doesn't hide images */
+			img.lazy,
+			img.lazyload,
+			img.jetpack-lazy-image {
+				display: block !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+			}
+			
+			/* Fix logo display specifically on mobile */
+			.custom-logo,
+			.custom-logo-link img,
+			.site-logo-img img,
+			header .custom-logo-link img {
+				display: block !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+				max-width: 120px !important;
+				width: 120px !important;
+				height: auto !important;
+			}
+		}
 	</style>
 
-	<meta name="description" content="Your official destination for exclusive Madden Championship Series (MCS) rewards, giveaways, and community events. Sign in to claim your rewards EAMCS Rewards is your gateway to unlocking special in-game content, player items, and exclusive perks as part of the Madden NFL Championship Series. Whether you're competing, spectating, or just showing love for Madden, we've got" />>
+	<meta name="description" content="Your official destination for exclusive Madden Championship Series (MCS) rewards, giveaways, and community events. Sign in to claim your rewards EAMCS Rewards is your gateway to unlocking special in-game content, player items, and exclusive perks as part of the Madden NFL Championship Series. Whether you're competing, spectating, or just showing love for Madden, we've got" />
 <html dir="ltr" lang="en-US" prefix="og: https://ogp.me/ns#">
 
 
@@ -81,6 +168,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
 	<link rel="profile" href="https://gmpg.org/xfn/11"> 
 	<title>Home - EA MCS REWARDS</title>
 	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
@@ -352,6 +442,25 @@
 				padding: 20px;
 				margin: 10px;
 			}
+			
+			/* Force image visibility on mobile */
+			img {
+				display: block !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+			}
+			
+			.elementor-image img,
+			.elementor-widget-image img,
+			.enhanced-section img,
+			.wp-post-image,
+			.attachment-full {
+				display: block !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+				max-width: 100% !important;
+				height: auto !important;
+			}
 		}
 	</style>
 <script>
@@ -434,6 +543,101 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 <meta name="msapplication-TileImage" content="wp-content/uploads/2025/08/cropped-ea-sports-logo-270x270.png" />
 </head>
 
+<script>
+// Mobile Logo Fix - Force correct logo paths on mobile devices
+document.addEventListener('DOMContentLoaded', function() {
+    function fixLogoDisplayMobile() {
+        const logoImages = document.querySelectorAll('img.custom-logo, .site-logo-img img');
+        
+        logoImages.forEach(function(img) {
+            const currentSrc = img.getAttribute('src');
+            
+            // Check if the src contains file:// protocol (problematic on mobile)
+            if (currentSrc && (currentSrc.includes('file://') || currentSrc.includes('C:') || currentSrc.includes('file:/'))) {
+                console.log('Found problematic logo path:', currentSrc);
+                
+                // Set correct relative path for logo
+                const correctPath = 'wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png';
+                img.setAttribute('src', correctPath);
+                
+                // Also fix srcset if it exists
+                const srcset = img.getAttribute('srcset');
+                if (srcset && (srcset.includes('file://') || srcset.includes('C:') || srcset.includes('file:/'))) {
+                    const correctSrcset = 'wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png 120w, wp-content/uploads/2025/08/cropped-Untitled-design-1-300x267.png 300w, wp-content/uploads/2025/08/cropped-Untitled-design-1-1024x913.png 1024w, wp-content/uploads/2025/08/cropped-Untitled-design-1-768x685.png 768w, wp-content/uploads/2025/08/cropped-Untitled-design-1-1536x1369.png 1536w, wp-content/uploads/2025/08/cropped-Untitled-design-1.png 2047w';
+                    img.setAttribute('srcset', correctSrcset);
+                }
+                
+                console.log('Fixed logo path to:', correctPath);
+            }
+        });
+        
+        // Force logo to be visible on mobile
+        const logoContainers = document.querySelectorAll('.site-logo-img, .custom-logo-link');
+        logoContainers.forEach(function(container) {
+            container.style.display = 'inline-block';
+            container.style.visibility = 'visible';
+            container.style.opacity = '1';
+        });
+    }
+    
+    // Run the fix immediately
+    fixLogoDisplayMobile();
+    
+    // Run the fix again after a short delay to catch any lazy-loaded content
+    setTimeout(fixLogoDisplayMobile, 1000);
+    
+    // Run the fix on window resize (orientation change on mobile)
+    window.addEventListener('resize', fixLogoDisplayMobile);
+    
+    // Run the fix on page visibility change (when user returns to tab)
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            fixLogoDisplayMobile();
+        }
+    });
+});
+</script>
+
+<!-- Mobile Logo CSS Fix -->
+<style>
+/* Ensure logo is always visible on mobile */
+@media (max-width: 768px) {
+    .site-logo-img, 
+    .custom-logo-link, 
+    .custom-logo {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        max-width: 120px !important;
+        height: auto !important;
+    }
+    
+    /* Force logo container to show */
+    .ast-site-identity {
+        display: block !important;
+    }
+    
+    /* Prevent logo from being hidden by other CSS */
+    .site-branding {
+        display: block !important;
+    }
+    
+    /* Ensure logo image loads */
+    .custom-logo {
+        background: none !important;
+        content: none !important;
+    }
+}
+
+/* Fallback for very small screens */
+@media (max-width: 480px) {
+    .site-logo-img img {
+        max-width: 100px !important;
+        width: 100px !important;
+    }
+}
+</style>
+
 <body itemtype='https://schema.org/WebPage' itemscope='itemscope' class="home wp-singular page-template-default page page-id-769 wp-custom-logo wp-theme-astra eio-default ast-desktop ast-page-builder-template ast-no-sidebar astra-4.11.10 ast-single-post ast-replace-site-logo-transparent ast-inherit-site-logo-transparent ast-theme-transparent-header ast-hfb-header elementor-default elementor-kit-703 elementor-page elementor-page-769">
 
 <!-- Confetti Container -->
@@ -464,7 +668,7 @@ class="hfeed site" id="page">
 									<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
 							<div
 				class="site-branding ast-site-identity" itemtype="https://schema.org/Organization" itemscope="itemscope"				>
-					<span class="site-logo-img"><a href="index.html" class="custom-logo-link transparent-custom-logo" rel="home" itemprop="url" aria-label="EA MCS REWARDS"><img width="120" height="107" src="wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png" class="custom-logo" alt="" decoding="async" srcset="wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png 120w, wp-content/uploads/2025/08/cropped-Untitled-design-1-300x267.png 300w, wp-content/uploads/2025/08/cropped-Untitled-design-1-1024x913.png 1024w, wp-content/uploads/2025/08/cropped-Untitled-design-1-768x685.png 768w, wp-content/uploads/2025/08/cropped-Untitled-design-1-1536x1369.png 1536w, wp-content/uploads/2025/08/cropped-Untitled-design-1.png 2047w" sizes="(max-width: 120px) 100vw, 120px" /></a></span>				</div>
+					<span class="site-logo-img"><a href="index.html" class="custom-logo-link transparent-custom-logo" rel="home" itemprop="url" aria-label="EA MCS REWARDS"><img width="120" height="107" src="wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png" class="custom-logo" alt="" decoding="async"  sizes="(max-width: 120px) 100vw, 120px" /></a></span>				</div>
 			<!-- .site-branding -->
 					</div>
 												<div class="site-header-above-section-left-center site-header-section ast-flex ast-grid-left-center-section">
@@ -499,7 +703,7 @@ class="hfeed site" id="page">
 										<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
 							<div
 				class="site-branding ast-site-identity" itemtype="https://schema.org/Organization" itemscope="itemscope"				>
-					<span class="site-logo-img"><a href="index.html" class="custom-logo-link transparent-custom-logo" rel="home" itemprop="url" aria-label="EA MCS REWARDS"><img width="120" height="107" src="wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png" class="custom-logo" alt="" decoding="async" srcset="wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png 120w, wp-content/uploads/2025/08/cropped-Untitled-design-1-300x267.png 300w, wp-content/uploads/2025/08/cropped-Untitled-design-1-1024x913.png 1024w, wp-content/uploads/2025/08/cropped-Untitled-design-1-768x685.png 768w, wp-content/uploads/2025/08/cropped-Untitled-design-1-1536x1369.png 1536w, wp-content/uploads/2025/08/cropped-Untitled-design-1.png 2047w" sizes="(max-width: 120px) 100vw, 120px" /></a></span>				</div>
+					<span class="site-logo-img"><a href="index.html" class="custom-logo-link transparent-custom-logo" rel="home" itemprop="url" aria-label="EA MCS REWARDS"><img width="120" height="107" src="wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png" class="custom-logo" alt="" decoding="async"  sizes="(max-width: 120px) 100vw, 120px" /></a></span>				</div>
 			<!-- .site-branding -->
 					</div>
 									</div>
@@ -777,6 +981,62 @@ class="site-footer" id="colophon" itemtype="https://schema.org/WPFooter" itemsco
 					document.addEventListener( event, lazyloadRunObserver );
 				} );
 			</script>
+
+			<!-- Mobile Image Visibility Fix -->
+			<script>
+			// Mobile image visibility force function
+			function forceMobileImageVisibility() {
+				// Check if on mobile device
+				const isMobile = window.matchMedia("(max-width: 768px)").matches;
+				
+				if (isMobile) {
+					// Force all images to be visible
+					const images = document.querySelectorAll('img');
+					images.forEach(function(img) {
+						img.style.display = 'block';
+						img.style.visibility = 'visible';
+						img.style.opacity = '1';
+						img.style.maxWidth = '100%';
+						img.style.height = 'auto';
+						
+						// Remove any lazy loading classes that might hide images
+						img.classList.remove('jetpack-lazy-image', 'lazy', 'lazyload');
+						
+						// If image has data-src, move to src
+						if (img.getAttribute('data-src')) {
+							img.src = img.getAttribute('data-src');
+						}
+						
+						// Force load the image
+						if (img.complete && img.naturalHeight === 0) {
+							img.onerror = null;
+							img.src = img.src;
+						}
+					});
+					
+					// Force Elementor images specifically
+					const elementorImages = document.querySelectorAll('.elementor-image img, .elementor-widget-image img, .elementor-image-box-img img');
+					elementorImages.forEach(function(img) {
+						img.style.display = 'block !important';
+						img.style.visibility = 'visible !important';
+						img.style.opacity = '1 !important';
+					});
+				}
+			}
+			
+			// Run on page load
+			document.addEventListener('DOMContentLoaded', forceMobileImageVisibility);
+			
+			// Run after a delay to catch lazy loaded images
+			setTimeout(forceMobileImageVisibility, 1000);
+			
+			// Run when window resizes (orientation change)
+			window.addEventListener('resize', forceMobileImageVisibility);
+			
+			// Run when Elementor finishes loading
+			document.addEventListener('elementor/frontend/init', forceMobileImageVisibility);
+			</script>
+
 			<script id="astra-theme-js-js-extra">
 var astra = {"break_point":"921","isRtl":"","is_scroll_to_id":"","is_scroll_to_top":"","is_header_footer_builder_active":"1","responsive_cart_click":"flyout","is_dark_palette":""};
 </script>
