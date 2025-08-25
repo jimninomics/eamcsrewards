@@ -1,0 +1,17 @@
+HTTrack3.49-2+htsswf+htsjava launched on Sun, 24 Aug 2025 21:22:10 at https://dalameen.com/ea/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://dalameen.com/ea/ -O1 "C:\My Web Sites\EAMCS" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+21:22:22	Warning: 	Moved Permanently for https://dalameen.com/robots.txt
+21:22:22	Warning: 	Redirected link is identical because of 'URL Hack' option: https://dalameen.com/robots.txt and https://www.dalameen.com/robots.txt
+21:22:22	Warning: 	Warning moved treated for https://dalameen.com/robots.txt (real one is https://www.dalameen.com/robots.txt)
+21:23:41	Warning: 	Moved Permanently for https://dalameen.com/ea/?p=1257
+21:23:41	Warning: 	File has moved from https://dalameen.com/ea/?p=1257 to https://dalameen.com/ea/sign-in/
+21:23:41	Error: 	"Not Found" (404) at link https://dalameen.com/ea/wp-content/plugins/wpforms-lite/assets/pro/images/times-solid-white.svg (from https://dalameen.com/ea/wp-content/plugins/wpforms-lite/assets/css/frontend/classic/wpforms-full.min.css?ver=1.9.7.3)
+
+HTTrack Website Copier/3.49-2 mirror complete in 1 minutes 31 seconds : 124 links scanned, 121 files written (7740612 bytes overall) [4596791 bytes received at 50514 bytes/sec], 4881364 bytes transferred using HTTP compression in 71 files, ratio 31%, 24.8 requests per connection
+(1 errors, 5 warnings, 0 messages)
