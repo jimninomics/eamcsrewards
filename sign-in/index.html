@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
 	<link rel="profile" href="https://gmpg.org/xfn/11"> 
 	<title>Sign In - EA MCS REWARDS</title>
 	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
@@ -1203,6 +1206,101 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 <meta name="msapplication-TileImage" content="../wp-content/uploads/2025/08/cropped-ea-sports-logo-270x270.png" />
 </head>
 
+<script>
+// Mobile Logo Fix - Force correct logo paths on mobile devices
+document.addEventListener('DOMContentLoaded', function() {
+    function fixLogoDisplayMobile() {
+        const logoImages = document.querySelectorAll('img.custom-logo, .site-logo-img img');
+        
+        logoImages.forEach(function(img) {
+            const currentSrc = img.getAttribute('src');
+            
+            // Check if the src contains file:// protocol (problematic on mobile)
+            if (currentSrc && (currentSrc.includes('file://') || currentSrc.includes('C:') || currentSrc.includes('file:/'))) {
+                console.log('Found problematic logo path:', currentSrc);
+                
+                // Set correct relative path for logo (relative to sign-in folder)
+                const correctPath = '../wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png';
+                img.setAttribute('src', correctPath);
+                
+                // Also fix srcset if it exists
+                const srcset = img.getAttribute('srcset');
+                if (srcset && (srcset.includes('file://') || srcset.includes('C:') || srcset.includes('file:/'))) {
+                    const correctSrcset = '../wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png 120w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-300x267.png 300w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-1024x913.png 1024w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-768x685.png 768w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-1536x1369.png 1536w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1.png 2047w';
+                    img.setAttribute('srcset', correctSrcset);
+                }
+                
+                console.log('Fixed logo path to:', correctPath);
+            }
+        });
+        
+        // Force logo to be visible on mobile
+        const logoContainers = document.querySelectorAll('.site-logo-img, .custom-logo-link');
+        logoContainers.forEach(function(container) {
+            container.style.display = 'inline-block';
+            container.style.visibility = 'visible';
+            container.style.opacity = '1';
+        });
+    }
+    
+    // Run the fix immediately
+    fixLogoDisplayMobile();
+    
+    // Run the fix again after a short delay to catch any lazy-loaded content
+    setTimeout(fixLogoDisplayMobile, 1000);
+    
+    // Run the fix on window resize (orientation change on mobile)
+    window.addEventListener('resize', fixLogoDisplayMobile);
+    
+    // Run the fix on page visibility change (when user returns to tab)
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            fixLogoDisplayMobile();
+        }
+    });
+});
+</script>
+
+<!-- Mobile Logo CSS Fix -->
+<style>
+/* Ensure logo is always visible on mobile */
+@media (max-width: 768px) {
+    .site-logo-img, 
+    .custom-logo-link, 
+    .custom-logo {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        max-width: 120px !important;
+        height: auto !important;
+    }
+    
+    /* Force logo container to show */
+    .ast-site-identity {
+        display: block !important;
+    }
+    
+    /* Prevent logo from being hidden by other CSS */
+    .site-branding {
+        display: block !important;
+    }
+    
+    /* Ensure logo image loads */
+    .custom-logo {
+        background: none !important;
+        content: none !important;
+    }
+}
+
+/* Fallback for very small screens */
+@media (max-width: 480px) {
+    .site-logo-img img {
+        max-width: 100px !important;
+        width: 100px !important;
+    }
+}
+</style>
+
 <body itemtype='https://schema.org/WebPage' itemscope='itemscope' class="wp-singular page-template-default page page-id-1257 wp-custom-logo wp-theme-astra eio-default ast-desktop ast-page-builder-template ast-no-sidebar astra-4.11.10 ast-single-post ast-replace-site-logo-transparent ast-inherit-site-logo-transparent ast-theme-transparent-header ast-hfb-header elementor-default elementor-kit-703 elementor-page elementor-page-1257">
 
 <!-- Confetti Animation -->
@@ -1243,7 +1341,7 @@ class="hfeed site" id="page">
 									<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
 							<div
 				class="site-branding ast-site-identity" itemtype="https://schema.org/Organization" itemscope="itemscope"				>
-					<span class="site-logo-img"><a href="../index.html" class="custom-logo-link transparent-custom-logo" rel="home" itemprop="url" aria-label="EA MCS REWARDS"><img width="120" height="107" src="../wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png" class="custom-logo" alt="" decoding="async" srcset="../wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png 120w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-300x267.png 300w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-1024x913.png 1024w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-768x685.png 768w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-1536x1369.png 1536w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1.png 2047w" sizes="(max-width: 120px) 100vw, 120px" /></a></span>				</div>
+					<span class="site-logo-img"><a href="../index.html" class="custom-logo-link transparent-custom-logo" rel="home" itemprop="url" aria-label="EA MCS REWARDS"><img width="120" height="107" src="../wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png" class="custom-logo" alt="" decoding="async" sizes="(max-width: 120px) 100vw, 120px" /></a></span>				</div>
 			<!-- .site-branding -->
 					</div>
 												<div class="site-header-above-section-left-center site-header-section ast-flex ast-grid-left-center-section">
@@ -1278,7 +1376,7 @@ class="hfeed site" id="page">
 										<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
 							<div
 				class="site-branding ast-site-identity" itemtype="https://schema.org/Organization" itemscope="itemscope"				>
-					<span class="site-logo-img"><a href="../index.html" class="custom-logo-link transparent-custom-logo" rel="home" itemprop="url" aria-label="EA MCS REWARDS"><img width="120" height="107" src="../wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png" class="custom-logo" alt="" decoding="async" srcset="../wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png 120w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-300x267.png 300w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-1024x913.png 1024w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-768x685.png 768w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1-1536x1369.png 1536w, ../wp-content/uploads/2025/08/cropped-Untitled-design-1.png 2047w" sizes="(max-width: 120px) 100vw, 120px" /></a></span>				</div>
+					<span class="site-logo-img"><a href="../index.html" class="custom-logo-link transparent-custom-logo" rel="home" itemprop="url" aria-label="EA MCS REWARDS"><img width="120" height="107" src="../wp-content/uploads/2025/08/cropped-Untitled-design-1-120x107.png" class="custom-logo" alt="" decoding="async" sizes="(max-width: 120px) 100vw, 120px" /></a></span>				</div>
 			<!-- .site-branding -->
 					</div>
 									</div>
